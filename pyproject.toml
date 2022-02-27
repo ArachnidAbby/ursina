@@ -1,0 +1,7 @@
+[build-system]
+requires = ["setuptools"]
+
+[project]
+name = "ursina"
+authors = [{name = "Petter Amland", email = "pokepetter@gmail.com"}]
+dynamic = ["version", "description"]
