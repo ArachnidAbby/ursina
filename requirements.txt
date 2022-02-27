@@ -1,0 +1,6 @@
+Panda3D
+panda3d-gltf
+pillow
+screeninfo
+pyperclip
+sphinx

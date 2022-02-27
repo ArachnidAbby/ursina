@@ -1,3 +1,4 @@
+# python
 *.pyc
 __pycache__
 ursina.egg-info
@@ -5,7 +6,9 @@ dist
 /build
 webgl
 todo
+env/
 
+# other
 video_temp
 */unused/*
 samples/wip
@@ -15,6 +18,10 @@ samples/models*
 *blob_animation*
 program.prof
 
+# vscode
 **/*~
 **/*.swp
 **/.vscode
+
+# sphinx documentation
+docs/build/
