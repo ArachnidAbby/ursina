@@ -14,10 +14,10 @@ class Vec2(PandaVec2):
 
 
     def __iadd__(self, value):
-            for i in range(0, len(value), 2):
-                self.add_x(value[i])
-                self.add_y(value[i+1])
-            return self
+        for i in range(0, len(value), 2):
+            self.add_x(value[i])
+            self.add_y(value[i+1])
+        return self
 
 
     def __add__(self, value):
@@ -60,5 +60,6 @@ class Vec2(PandaVec2):
 
 if __name__ == '__main__':
     a = Vec2(1,1)
+    a+=Vec2(1,1)
     print(a)
     print(round(a))
