@@ -11,7 +11,12 @@ setup: env/bin/activate
 sphinx-build: env/bin/activate
 	./env/bin/sphinx-build -b html sphinx_docs/source/ sphinx_docs/build/html
 
+# clean sphinx build files
+sphinx-clean: env/bin/activate
+	rm -rf sphinx_docs/build
+
 # remove pycache and envirnment
 clean:
 	rm -rf __pycache__
-	rm -rf env  
+	rm -rf env
+	rm -rf sphinx_docs/build
