@@ -1,0 +1,46 @@
+Installation
+#############
+
+1. Install Python 3.6 or newer. https://www.python.org/downloads/
+
+2. Open cmd/terminal and type:
+    .. code-block:: bash
+
+        pip install ursina
+
+    If you want to install the newest version from GitHub, you can install like this:
+        .. code-block:: bash
+
+            pip install https://github.com/pokepetter/ursina/archive/master.zip
+
+    or:
+        .. code-block:: bash
+        
+            pip install git+https://github.com/pokepetter/ursina.git
+
+
+    Keep in mind that things *could* break.
+
+
+    If you want to easily edit the source, it's recommended to clone the git
+    repo and install as develop like this. Make sure you have git installed. https://git-scm.com/
+
+    .. code-block:: bash
+
+        git clone https://github.com/pokepetter/ursina.git
+        python setup.py develop
+
+    Also install any of the optional dependencies you want from the list below,
+    or install them all with:
+
+    .. code-block:: bash
+
+        pip install ursina[extras]
+
+
+    On some systems you might have to use pip3 instead of pip in order to use Python 3 and not the old Python 2.
+    If the pip command is not found, you can use:
+
+    .. code-block:: bash
+
+        python -m pip install ursina
