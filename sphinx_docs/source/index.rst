@@ -13,12 +13,8 @@ Guides & more!
    :maxdepth: 1
    :glob:
 
-   README.rst
-   tutorials/installation
-   tutorials/introduction
-   tutorials/collisions
-   tutorials/coordinate_system
-   tutorials/blender_for_levels.rst
+   README
+   tutorials/index
 
 Modules
 --------
@@ -27,7 +23,7 @@ Modules
    :maxdepth: 1
    :glob:
 
-   module_docs/*
+   module_docs/index
 
 
 .. commented out until an artical of this type is added

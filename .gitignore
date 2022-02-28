@@ -24,4 +24,4 @@ program.prof
 **/.vscode
 
 # sphinx documentation
-docs/build/
+sphinx_docs/build/

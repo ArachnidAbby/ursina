@@ -21,7 +21,7 @@ Gettings started
             # reload = True
         )
 
-How does it do?
+What does it do?
 ^^^^^^^^^^^^^^^^
 
 This makes sure objects share the same mesh wherever possible.

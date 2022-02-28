@@ -9,7 +9,7 @@ setup: env/bin/activate
 
 # build sphinx html docs
 sphinx-build: env/bin/activate
-	./env/bin/sphinx-build -b html docs/source/ docs/build/html
+	./env/bin/sphinx-build -b html sphinx_docs/source/ sphinx_docs/build/html
 
 # remove pycache and envirnment
 clean:

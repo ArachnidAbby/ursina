@@ -1,0 +1,4 @@
+# required for readthedocs.io documentation building
+
+sphinx
+sphinx-rtd-theme
