@@ -15,6 +15,7 @@ Guides & more!
 
    README
    tutorials/index
+   projects/index
 
 Modules
 --------
@@ -35,6 +36,12 @@ Modules
       :glob:
 
       tutorials/common_mistakes/*
+
+.. toctree::
+   :maxdepth: 1
+   :hidden:
+
+   user_content/index
 
 
 Indices and tables

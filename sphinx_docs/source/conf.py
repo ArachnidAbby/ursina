@@ -58,3 +58,6 @@ html_static_path = ['_static']
 modindex_common_prefix = ["ursina."]
 
 html_logo = "_static/ursina_logo.png"
+
+def setup(app):
+   app.add_css_file('css/custom.css')
