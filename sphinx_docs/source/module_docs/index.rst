@@ -7,3 +7,4 @@ Module Docs
     self
     main
     application
+    entity

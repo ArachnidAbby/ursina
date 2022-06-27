@@ -1,5 +1,5 @@
 main
-#####
+=====
 
 .. py:module:: ursina.main
 
@@ -7,7 +7,7 @@ This module contains main logic for Ursina Engine run-time.
 
 .. py:class:: Ursina(**kwargs)
 
-    :synopsis: This class initializes engine essentials. 
+    :description: This class initializes engine essentials. 
         This includes settings up globals, instantiating the windows, creating the camera, and more.
 
     :param size: Optional window Size.
@@ -45,17 +45,18 @@ This module contains main logic for Ursina Engine run-time.
 
     .. py:classmethod:: run()
 
-        :synopsis: Starts the application.
+        :description: Starts the application.
     
-    **Example:**
-        .. code-block:: python
+    
+    .. code-block:: python
+        :caption: Example code
 
-            from ursina import *
+        from ursina import *
 
-            app = Ursina(vysnc = True)
+        app = Ursina(vysnc = True)
 
-            def update():
-                ...
+        def update():
+            ...
             
-            app.run()
+        app.run()
     

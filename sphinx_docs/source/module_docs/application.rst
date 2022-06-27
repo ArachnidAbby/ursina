@@ -35,18 +35,18 @@ Functions
 
 .. py:function:: pause()
     
-    :synopsis: Changes applicaiton state to :code:`paused`
+    :description: Changes applicaiton state to :code:`paused`
 
 .. py:function:: resume()
 
-    :synopsis: Un-pauses the application.
+    :description: Un-pauses the application.
  
 .. py:function:: quit()
 
-    :synopsis: Quits the application
+    :description: Quits the application
 
 .. py:function:: load_settings(path=asset_folder / 'settings.py')
 
-    :synopsis: Loads :code:`settings.py` file if it exists
+    :description: Loads :code:`settings.py` file if it exists
 
     :param os.Path path: The containing folder of the :code:`settings.py` file
