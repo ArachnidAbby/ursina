@@ -1,10 +1,11 @@
+============
 application
-############
+============
 
 .. py:module:: ursina.application
 
 Globals
---------
+========
 
 This module contains global data such as pause state, development_mode, and project paths.
 
@@ -31,7 +32,7 @@ This module contains global data such as pause state, development_mode, and proj
     :var bool hot_reloader: set in development mode to allow reloading of the engine on-the-fly [citation needed].
 
 Functions
-----------
+==========
 
 .. py:function:: pause()
     

@@ -1,8 +1,9 @@
+==========
 Collision
-=================
+==========
 
 Colliders
-----------
+==========
 
 .. code-block:: python
 
@@ -24,7 +25,7 @@ before setting the collider if you want it to fit its bounds.
     e = Entity(model='cube', collider='box')
 
 raycast()
-----------
+==========
 
 .. code-block:: python
 
@@ -66,7 +67,7 @@ Example where we only move if a wall is not hit:
     app.run()
 
 boxcast()
-----------
+==========
 
 .. code-block:: python
 
@@ -76,7 +77,7 @@ boxcast is similar to raycast, but the "ray" has thickness, height and width.
 
 
 intersects()
--------------
+=============
 
 Check if a entity (with a collider) intersects other entities with colliders.
 
@@ -107,7 +108,7 @@ Check if a entity (with a collider) intersects other entities with colliders.
 
 
 HitInfo
---------
+========
 
 All of these functions will return a HitInfo. This contains information about what it hit.
 
@@ -124,7 +125,7 @@ All of these functions will return a HitInfo. This contains information about wh
     entities = []
 
 Distance Check
----------------
+===============
 
 Sometimes it enough to just check the distance between two entities.
 For example if you want a pickup:
@@ -155,7 +156,7 @@ For example if you want a pickup:
 
 
 Mouse Collision
-----------------
+================
 
 The mouse does raycast automatically.
 Both UI elements(Entities parented to camera.ui) and Entities in 3d space (parented to scene) can

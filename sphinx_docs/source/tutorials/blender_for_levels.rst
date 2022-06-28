@@ -1,14 +1,15 @@
+================================
 Using Blender for Level Editing
 ================================
 
 prerequisites
---------------
+==============
 
     * Knowledge of how to use blender.
     * Some understanding of Ursina.
 
 Gettings started
------------------
+=================
 
 .. code-block:: python
 
@@ -22,12 +23,12 @@ Gettings started
         )
 
 What does it do?
-^^^^^^^^^^^^^^^^
+-----------------
 
 This makes sure objects share the same mesh wherever possible.
 
 What about colliders
----------------------
+=====================
 
 just loop through all the level's children and apply modifications and collisions wherever needed.
 

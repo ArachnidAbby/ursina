@@ -1,46 +1,58 @@
+=============
 Installation
-#############
+=============
 
-1. Install Python 3.6 or newer. https://www.python.org/downloads/
+.. role:: bash(code)
+   :language: console
 
-2. Open cmd/terminal and type:
-    .. code-block:: bash
+Prerequisites
+==============
 
-        pip install ursina
+#. `Python <https://www.python.org/downloads/>`__
 
-    If you want to install the newest version from GitHub, you can install like this:
-        .. code-block:: bash
+#. `Pip <https://linuxize.com/post/how-to-install-pip-on-ubuntu-18.04/>`__ (Should be included in default python installation.)
 
-            pip install https://github.com/pokepetter/ursina/archive/master.zip
+#. `Git <https://git-scm.com/>`__ (If modifying source)
 
-    or:
-        .. code-block:: bash
+
+How to Install
+===============
+
+.. note::
+
+    If pip is not found, try this instead:
+    :bash:`$ python -m pip install ursina`
+
+.. tabs::
+
+    .. group-tab:: Default
+
+        The most basic installation of Ursina Engine.
+        :bash:`$ pip install ursina`
+
+    .. group-tab:: Github/Latest
+
+        :bash:`$ pip install https://github.com/pokepetter/ursina/archive/master.zip`
+
+        or:
         
-            pip install git+https://github.com/pokepetter/ursina.git
+        :bash:`$ pip install git+https://github.com/pokepetter/ursina.git`
 
 
-    Keep in mind that things *could* break.
+        Keep in mind that things *could* break.
 
+    .. group-tab:: Extras
 
-    If you want to easily edit the source, it's recommended to clone the git
-    repo and install as develop like this. Make sure you have git installed. https://git-scm.com/
+        You can install all Ursina extras with the command below.
 
-    .. code-block:: bash
+        :bash:`$ pip install ursina[extras]`
 
-        git clone https://github.com/pokepetter/ursina.git
-        python setup.py develop
+    .. group-tab:: Edit the Source
 
-    Also install any of the optional dependencies you want from the list below,
-    or install them all with:
+        Ursina is open-source and allows users to request their own code to be added.
+        
+        .. code-block:: console
 
-    .. code-block:: bash
-
-        pip install ursina[extras]
-
-
-    On some systems you might have to use pip3 instead of pip in order to use Python 3 and not the old Python 2.
-    If the pip command is not found, you can use:
-
-    .. code-block:: bash
-
-        python -m pip install ursina
+            $ git clone https://github.com/pokepetter/ursina.git
+            $ python setup.py develop
+    

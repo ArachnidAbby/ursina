@@ -1,101 +1,94 @@
-Introduction Tutorial
-======================
+================
+Getting Started
+================
 
-****************************
-Creating and running a game
-****************************
-
-1. Open your preferred text editor. If you're new to programming, here are some suggestions:
-    * Atom
+Open an IDE
+============
+If you are new to programming, here is a list of common IDEs.
     * Visual Studio Code
+    * Atom
     * Sublime Text
 
+Prepare coding environment
+==========================
 
-2. Create a new folder for your project. This will contain scripts and assets.
-    For ursina to find 3d models and textures, they should be in the same folder or in
-    a folder below the starting script.
+#. Create a folder to contain your project.
+#. Create a :code:`main.py` file inside your newly created project folder.
+#. Open in your IDE of choice.
 
-    In this folder, create a new file called main.py. This will contain our little game.
+.. note:: 
+
+    All asssets, Images, models, etc, will be placed inside your project folder.
+
+Getting Starting (code)
+========================
+
+Import Ursina Engine
+---------------------
+
+.. code-block:: python
+
+    # Main.py
+    from ursina import * # imports all parts of the Ursina Engine
+
+Basic Game Example
+-------------------
+
+Here's a really basic example game with comments to explain what we're doing.
+We will simply make an orange box move right and left when we press 'd' or 'a'.
+
+.. code-block:: python
+
+    from ursina import *
+
+    # create a window
+    app = Ursina()
+
+    # most things in ursina are Entities. An Entity is a thing you place in the world.
+    # you can think of them as GameObjects in Unity or Actors in Unreal.
+    # the first paramenter tells us the Entity's model will be a 3d-model called 'cube'.
+    # ursina includes some basic models like 'cube', 'sphere' and 'quad'.
+
+    # the next parameter tells us the model's color should be orange.
+
+    # 'scale_y=2' tells us how big the entity should be in the vertical axis, how tall it should be.
+    # in ursina, positive x is right, positive y is up, and positive z is forward.
+
+    player = Entity(model='cube', color=color.orange, scale_y=2)
+
+    # create a function called 'update'.
+    # this will automatically get called by the engine every frame.
+
+    def update():
+        player.x += held_keys['d'] * time.dt
+        player.x -= held_keys['a'] * time.dt
+
+    # this part will make the player move left or right based on our input.
+    # to check which keys are held down, we can check the held_keys dictionary.
+    # 0 means not pressed and 1 means pressed.
+    # time.dt is simply the time since the last frame. by multiplying with this, the
+    # player will move at the same speed regardless of how fast the game runs.
 
 
-3. At the top of the file, write:
-    .. code-block:: python
+    def input(key):
+        if key == 'space':
+            player.y += 1
+            invoke(setattr, player, 'y', player.y-1, delay=.25)
 
-        from ursina import *
+
+    # start running the game
+    app.run()
+
+
+
+Run the Script
+---------------
+
+.. code-block:: console
+
+    $ python main.py
     
-    
-    This will import all the necessary things we need from the engine in one line.
-    It means something like 'from ursina import all'. It's also possible to import parts of the engine
-    like this:
 
-    .. code-block:: python
-    
-        from ursina.prefabs import Button
-    
+.. note::
 
-    Or import something that's not included by default:
-    
-    .. code-block:: python
-
-        from ursina.prefabs.first_person_controller import FirstPersonController
-    
-
-
-4. Here's a really basic example game with comments to explain what we're doing.
-    We will simply make an orange box move right and left when we press 'd' or 'a'.
-
-    .. code-block:: python
-
-        from ursina import *
-
-        # create a window
-        app = Ursina()
-
-        # most things in ursina are Entities. An Entity is a thing you place in the world.
-        # you can think of them as GameObjects in Unity or Actors in Unreal.
-        # the first paramenter tells us the Entity's model will be a 3d-model called 'cube'.
-        # ursina includes some basic models like 'cube', 'sphere' and 'quad'.
-
-        # the next parameter tells us the model's color should be orange.
-
-        # 'scale_y=2' tells us how big the entity should be in the vertical axis, how tall it should be.
-        # in ursina, positive x is right, positive y is up, and positive z is forward.
-
-        player = Entity(model='cube', color=color.orange, scale_y=2)
-
-        # create a function called 'update'.
-        # this will automatically get called by the engine every frame.
-
-        def update():
-            player.x += held_keys['d'] * time.dt
-            player.x -= held_keys['a'] * time.dt
-
-        # this part will make the player move left or right based on our input.
-        # to check which keys are held down, we can check the held_keys dictionary.
-        # 0 means not pressed and 1 means pressed.
-        # time.dt is simply the time since the last frame. by multiplying with this, the
-        # player will move at the same speed regardless of how fast the game runs.
-
-
-        def input(key):
-            if key == 'space':
-                player.y += 1
-                invoke(setattr, player, 'y', player.y-1, delay=.25)
-
-
-        # start running the game
-        app.run()
-
-
-
-5. Now we have to tell Python to run the script. To do this, open the command line and
-    go to the current folder. An easy way to do this is to type 'cmd' in the address bar.
-    Run the command below.
-
-     .. code-block:: python
-
-        python main.py
-     
-
-    An alternative is to install the 'atom-python-run' package in Atom so you can start
-    the game by pressing F5.
+    An alternative is to install the 'atom-python-run' package in Atom so you can start the game by pressing F5.

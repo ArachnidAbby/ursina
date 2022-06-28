@@ -8,3 +8,4 @@ pyperclip
 # documentation
 sphinx
 sphinx-rtd-theme
+sphinx-tabs

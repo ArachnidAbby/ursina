@@ -1,3 +1,4 @@
+================================
 Ursina Shader Builder by Werxzy
 ================================
 
@@ -13,12 +14,12 @@ The project can be found `here on github`_.
 .. _here on github: https://github.com/Werxzy/UrsinaShaderBuilder
 
 Screenshots
-------------
+============
 
 .. image :: https://user-images.githubusercontent.com/3182796/153801834-76641b40-0741-446d-bf25-19dddea4003b.png
 
 Overview video
----------------
+===============
 
 .. raw:: html
 

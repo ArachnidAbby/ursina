@@ -1,3 +1,4 @@
+==================
 Gravkoban by 56cy
 ==================
 
@@ -10,7 +11,7 @@ The project can be found `here on github`_.
 .. _here on github: https://github.com/56cy/Gravkoban
 
 Videos
--------
+=======
 
 .. raw:: html
 
