@@ -71,8 +71,8 @@ class Entity(NodePath):
 
         self.collision = False  # toggle collision without changing collider.
         self.collider = None    # set to 'box'/'sphere'/'mesh' for auto fitted collider.
-        self.scripts = list()   # add with add_script(class_instance). will assign an 'entity' variable to the script.
-        self.animations = list()
+        self.scripts = []   # add with add_script(class_instance). will assign an 'entity' variable to the script.
+        self.animations = []
         self.hovered = False    # will return True if mouse hovers entity.
 
         self.origin = Vec3(0,0,0)
@@ -112,16 +112,16 @@ class Entity(NodePath):
             setattr(self, key, value)
 
         if self.enabled and hasattr(self, 'on_enable'):
-            if callable(self.on_enable):
-                self.on_enable()
-            elif isinstance(self.on_enable, Sequence):
+            if isinstance(self.on_enable, Sequence):
                 self.on_enable.start()
+            elif callable(self.on_enable):
+                self.on_enable()
 
         elif not self.enabled and hasattr(self, 'on_disable'):
-            if callable(self.on_disable):
-                self.on_disable()
-            elif isinstance(self.on_disable, Sequence):
+            if isinstance(self.on_disable, Sequence):
                 self.on_disable.start()
+            elif callable(self.on_disable):
+                self.on_disable()
 
 
     def _list_to_vec(self, value):
@@ -160,16 +160,16 @@ class Entity(NodePath):
     @enabled.setter
     def enabled(self, value):
         if value and hasattr(self, 'on_enable') and not self.enabled:
-            if callable(self.on_enable):
-                self.on_enable()
-            elif isinstance(self.on_disable, Sequence):
+            if isinstance(self.on_enable, Sequence):
                 self.on_enable.start()
+            elif callable(self.on_enable):
+                self.on_enable()
 
         elif value == False and hasattr(self, 'on_disable') and self.enabled:
-            if callable(self.on_disable):
-                self.on_disable()
-            elif isinstance(self.on_disable, Sequence):
+            if isinstance(self.on_disable, Sequence):
                 self.on_disable.start()
+            elif callable(self.on_disable):
+                self.on_disable()
 
 
         if value == True:
@@ -570,7 +570,7 @@ class Entity(NodePath):
 
     @property
     def quaternion(self):
-        return self.get_quat() * Quat(-1,0,0,0) * Quat(0,1,0,0)
+        return self.get_quat()
     @quaternion.setter
     def quaternion(self, value):
         self.set_quat(value)
@@ -604,7 +604,7 @@ class Entity(NodePath):
         return self.getScale(base.render)[2]
     @world_scale_z.setter
     def world_scale_z(self, value):
-        self.setScale(base.render, Vec3(self.world_scale_x, value, self.world_scale_z))
+        self.setScale(base.render, Vec3(self.world_scale_x, self.world_scale_y, value))
 
     @property
     def scale(self):
@@ -781,6 +781,8 @@ class Entity(NodePath):
 
     @property
     def texture_offset(self):
+        if not hasattr(self, '_texture_offset'):
+            return Vec2(0,0)
         return self._texture_offset
 
     @texture_offset.setter
@@ -920,6 +922,13 @@ class Entity(NodePath):
         self.setPos(relative_to, Vec3(value[0], value[1], value[2]))
 
 
+    def rotate(self, value, relative_to=None):  # rotate around local axis.
+        if not relative_to:
+            relative_to = self
+
+        self.setHpr(relative_to, Vec3(value[1], value[0], value[2]) * Entity.rotation_directions)
+
+
     def add_script(self, class_instance):
         if isinstance(class_instance, object) and type(class_instance) is not str:
             class_instance.entity = self
@@ -937,16 +946,21 @@ class Entity(NodePath):
         return self.model
 
 
-    def flip_faces(self):
-        if not hasattr(self, '_vertex_order'):
-            self._vertex_order = True
-
-        self._vertex_order = not self._vertex_order
-        if self._vertex_order:
+    @property
+    def flipped_faces(self):
+        return self._flipped_faces
+    @flipped_faces.setter
+    def flipped_faces(self, value):
+        self._flipped_faces = value
+        if value:
             self.setAttrib(CullFaceAttrib.make(CullFaceAttrib.MCullClockwise))
         else:
             self.setAttrib(CullFaceAttrib.make(CullFaceAttrib.MCullCounterClockwise))
 
+
+    def flip_faces(self):
+        print_warning('flipped_faces() is legacy. please use .flipped_faces instead')
+        self.flipped_faces = not self.flipped_faces
 
 
     def look_at(self, target, axis='forward'):
@@ -954,7 +968,7 @@ class Entity(NodePath):
         if not isinstance(target, Entity):
             target = Vec3(*target)
 
-        self.lookAt(target)
+        self.lookAt(target, Vec3(0,0,1))
         if axis == 'forward':
             return
 
@@ -979,6 +993,8 @@ class Entity(NodePath):
             self.rotation_z = degrees(atan2(pos[0], pos[1]))
         elif axis == 'y':
             self.rotation_y = degrees(atan2(pos[0], pos[2]))
+        elif axis == 'x':
+            self.rotation_x = degrees(atan2(pos[1], pos[2]))
 
 
     def has_ancestor(self, possible_ancestor):
@@ -1024,15 +1040,6 @@ class Entity(NodePath):
         return ('name', 'enabled', 'eternal', 'visible', 'parent',
             'origin', 'position', 'rotation', 'scale',
             'model', 'color', 'texture', 'texture_scale', 'texture_offset',
-
-            # 'world_position', 'world_x', 'world_y', 'world_z',
-            # 'world_rotation', 'world_rotation_x', 'world_rotation_y', 'world_rotation_z',
-            # 'world_scale', 'world_scale_x', 'world_scale_y', 'world_scale_z',
-            # 'x', 'y', 'z',
-            # 'origin_x', 'origin_y', 'origin_z',
-            # 'rotation_x', 'rotation_y', 'rotation_z',
-            # 'scale_x', 'scale_y', 'scale_z',
-
             'render_queue', 'always_on_top', 'collider', 'collision', 'scripts')
 
     def __str__(self):
@@ -1042,13 +1049,16 @@ class Entity(NodePath):
         default_values = {
             # 'parent':scene,
             'name':'entity', 'enabled':True, 'eternal':False, 'position':Vec3(0,0,0), 'rotation':Vec3(0,0,0), 'scale':Vec3(1,1,1), 'model':None, 'origin':Vec3(0,0,0),
-            'texture':None, 'color':color.white, 'collider':None}
+            'shader':None, 'texture':None, 'color':color.white, 'collider':None}
 
         changes = []
         for key, value in default_values.items():
             if not getattr(self, key) == default_values[key]:
                 if key == 'model' and hasattr(self.model, 'name'):
                     changes.append(f"model='{getattr(self, key).name}', ")
+                    continue
+                if key == 'shader' and self.shader:
+                    changes.append(f"shader={getattr(self, key).name}, ")
                     continue
                 if key == 'texture':
                     changes.append(f"texture='{getattr(self, key).name.split('.')[0]}', ")

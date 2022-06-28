@@ -1,4 +1,5 @@
 import time
+import platform
 
 from direct.showbase.ShowBase import ShowBase
 from direct.task.Task import Task
@@ -261,14 +262,20 @@ class Ursina(ShowBase):
                     if script.enabled and hasattr(script, 'keystroke') and callable(script.keystroke):
                         script.keystroke(key)
 
+    def step(self):     # use this control the update loop yourself. call app.step() in a while loop for example, instead of app.run()
+        self.taskMgr.step()
 
-    def run(self):
+
+    def run(self, info=True):
         if window.show_ursina_splash:
             from ursina.prefabs import ursina_splash
 
         application.load_settings()
-        print_info('development mode:', application.development_mode)
-        print('application successfully started')
+        if info:
+            print('screen resolution:', window.screen_resolution)
+            print('os:', platform.system())
+            print('development mode:', application.development_mode)
+            print('application successfully started')
 
         super().run()
 

@@ -2,8 +2,8 @@ from ursina import *
 
 
 class Slider(Entity):
-    def __init__(self, min=0, max=1, default=None, height=Text.size, text='', dynamic=False, **kwargs):
-        super().__init__()
+    def __init__(self, min=0, max=1, default=None, height=Text.size, text='', dynamic=False, radius=Text.size/2, bar_color=color.black66, **kwargs):
+        super().__init__(add_to_scene_entities=False) # add later, when __init__ is done
         self.parent = camera.ui
         self.vertical = False
         self.min = min
@@ -20,8 +20,8 @@ class Slider(Entity):
 
         self.label = Text(parent=self, origin=(0.5, 0), x=-0.025, text=text)
 
-        self.bg = Entity(parent=self, model=Quad(scale=(.525, height), radius=Text.size/2, segments=3),
-            origin_x=-0.25, collider='box', color=color.black66)
+        self.bg = Entity(parent=self, model=Quad(scale=(.525, height), radius=radius, segments=3),
+            origin_x=-0.25, collider='box', color=bar_color)
 
         self.knob = Draggable(parent=self, min_x=0, max_x=.5, min_y=0, max_y=.5, step=self.step,
             model=Quad(radius=Text.size/2, scale=(Text.size, height)), collider='box', color=color.light_gray,
@@ -63,6 +63,8 @@ class Slider(Entity):
         else:
             self.knob.lock = (0,1,1)
             self.knob.text_entity.y = height/2
+
+        scene.entities.append(self)
 
 
     @property
